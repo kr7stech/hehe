@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine? 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Confetti library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+  color: #333;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hearts" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M5 2C3 2 1 4 1 6c0 2 3 4 3 4s3-2 3-4c0-2-2-4-4-4z" fill="%23ff69b4" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23hearts)"/></svg>') repeat;
+  z-index: -1;
+  animation: float 20s ease-in-out infinite;
+}
+@keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+h1 { font-family: 'Dancing Script', cursive; font-size: clamp(2.5em, 8vw, 5em); color: #e91e63; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+
+section { margin: 60px 0; opacity: 0; animation: slideInUp 1s ease-out forwards; }
+section:nth-child(2){animation-delay:.2s}
+section:nth-child(3){animation-delay:.4s}
+section:nth-child(4){animation-delay:.6s}
+@keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+h2 { font-family: 'Dancing Script', cursive; font-size: clamp(1.8em, 5vw, 3em); color: #ad1457; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+.intro, .photos { background: rgba(255,255,255,0.9); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+.intro p { font-size: 1.2em; line-height: 1.6; margin-bottom: 20px; }
+.her-name { color: #e91e63; font-weight: 700; font-size: 1.3em; }
+
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+.photo-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 5px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.photo-grid img:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(233,30,99,0.4); }
+
+.question-section {
+  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+  color: white;
+  padding: 60px 40px;
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(233,30,99,0.4);
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+button { padding: 18px 40px; font-size: 1.4em; border: none; border-radius: 50px; cursor: pointer; transition: all .3s ease; min-width: 150px; }
+#yes { background: #4caf50; color: white; }
+#no { background: transparent; color: white; border: 3px solid white; position: relative; }
+#response { margin-top: 30px; font-size: 1.5em; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+
+.hearts { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1000; display:none; }
+.heart { position:absolute; font-size:2em; animation: heartFloat 3s ease-out forwards; }
+@keyframes heartFloat { from { transform: translateY(100vh) scale(0); opacity:1; } to { transform: translateY(-10vh) scale(1); opacity:0; } }
+
+@media (max-width:768px){ .container{padding:10px;} .photo-grid{grid-template-columns:1fr;} .buttons{flex-direction:column; align-items:center;} button{width:200px;} }
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="container">
+
+<section class="intro">
+<h1>💕Be My Valentine?💕</h1>
+<p>Hola <span class="her-name">Cynthia</span>,</p>
+<p>
+I know it’s Valentine’s Day, and yes, you’re already my girlfriend, but I don’t think something this special should ever feel automatic. You’re not someone I want to assume, you’re someone I want to choose. So today, I’m still asking, not because I have to, but because I want to. I want to ask you to be my Valentine, as a reminder that I choose you, openly and proudly.
+
+I don’t need perfect moments or perfect words. I just need you.
+I just want you.
+Not better than you.
+Not good as you.
+Not like you.
+But I only want you.
+
+If loving you is wrong, then I’ll gladly face every consequence that comes with it. Because even after all of that, after every doubt and every storm, I still just want you.
+
+You are the calm in my chaos, the smile I don’t even realize I’m waiting for, the person who makes ordinary days feel like they matter.
+
+And if people talk about our relationship, let them talk. I’ll be too busy choosing you every single day to care about the noise.
+
+This isn’t about showing the world anything. It’s about reminding you of one simple truth: you are wanted, you are loved, and you are my choice, always.
+</p>
+<br>
+<p><span class="her-name">Happy Valentine’s Day My Love 🤍</span></p>
+</section>
+
+<section class="photos">
+<h2><i class="fas fa-camera-retro"></i> Our Beautiful Memories</h2>
+<div class="photo-grid">
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+</div>
+</section>
+
+<section class="intro">
+<p>So for the Ultimate Question❗❗❗</p>
+<h2>👇🏽</h2>
+</section>
+
+<section class="question-section">
+  <div class="container">
+    <h1>Will You Be My Valentine?</h1>
+    <div class="buttons">
+      <button id="yes">Yes! 💕</button>
+      <button id="no">No 😔</button>
+    </div>
+    <div id="response"></div>
+
+    <!-- GIF Result -->
+    <div id="result" style="display:none; margin-top: 20px;">
+      <h2>YAYYYYY!🎉</h2>
+      <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" alt="Fireworks" style="width:300px; margin-top:10px; border-radius:15px;">
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const response = document.getElementById("response");
+const hearts = document.getElementById("hearts");
+const result = document.getElementById("result");
+
+let yesScale = 1;
+
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 150 - 75;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  yesScale += 0.1;
+  yesBtn.style.transform = `scale(${yesScale})`;
+});
+
+noBtn.addEventListener("click", e => e.preventDefault());
+
+yesBtn.addEventListener("click", () => {
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+  response.innerHTML = "Yayyyy! I love you so much!🤍";
+
+  result.style.display = "block";
+
+  // Confetti
+  confetti({
+    particleCount: 300,
+    spread: 150,
+    origin: { y: 0.6 }
+  });
+
+  // Floating hearts
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    hearts.appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
+  }
+});
+</script>
+
+</body>
+</html>
